@@ -8,17 +8,17 @@
 bool xoffSent = false;
 
 void checkFlowControl(int available) {
-    if (available > 0) {
-        Serial.print(F("Available bytes: "));
-        Serial.println(available);
-    }
+    //if (available > 0) {
+    //    Serial.print(F("Available bytes: "));
+    //    Serial.println(available);
+    //}
     if (!xoffSent && available >= BUFFER_HIGH_WATERMARK) {
         Serial.write(XOFF);
-        Serial.println(F("Flow control: XOFF sent"));
+        //Serial.println(F("Flow control: XOFF sent"));
         xoffSent = true;
     } else if (xoffSent && available <= BUFFER_LOW_WATERMARK) {
         Serial.write(XON);
-        Serial.println(F("Flow control: XON sent"));
+        //Serial.println(F("Flow control: XON sent"));
         xoffSent = false;
     }
 }
